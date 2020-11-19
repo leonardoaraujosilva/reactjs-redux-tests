@@ -27,6 +27,7 @@ const SignIn = () => {
                 dispatch(loginRequest(data));
             })
             .catch((error) => {
+                console.log(error);
                 var { data } = error.response;
                 setErrorMessage(`${data.title}: ${data.description}`);
             });
