@@ -3,13 +3,13 @@ import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { loginRequest } from '../../store/ducks/auth/actions';
-import api from '../../services/api';
+import api from '../../services/api/webadm';
 
 const SignIn = () => {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
 
-    const [ form, setForm ] = useState({ username: auth.email, password: '' });
+    const [ form, setForm ] = useState({ username: '', password: '' });
     const [ errorMessage, setErrorMessage ] = useState('');
 
     const onChangeForm = (e) => {
