@@ -3,20 +3,36 @@ import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { loginRequest } from '../../store/ducks/auth/actions';
+import api from '../../services/api';
 
-const SignIn = (props) => {
+const SignIn = () => {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
 
-    const [ email, setEmail ] = useState(auth.email);
-    const [ password, setPassword ] = useState('');
-    
-    const onFormSubmit = (e) => {
-        e.preventDefault();
-        dispatch(loginRequest(email, password));
+    const [ form, setForm ] = useState({ username: auth.email, password: '' });
+    const [ errorMessage, setErrorMessage ] = useState('');
+
+    const onChangeForm = (e) => {
+        const { name, value } = e.target;
+        setForm({ ...form, [name]: value });
     }
 
-    if(auth.loggedIn) {
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        setErrorMessage.apply('');
+
+        api.post('/api/v1/auth/token', form)
+            .then(({ data }) => {
+                localStorage.setItem('token', data.accessToken);
+                dispatch(loginRequest(data));
+            })
+            .catch((error) => {
+                var { data } = error.response;
+                setErrorMessage(`${data.title}: ${data.description}`);
+            });
+    }
+
+    if(auth.token) {
         return (
             <Redirect push to="/app" />
         );
@@ -24,8 +40,9 @@ const SignIn = (props) => {
 
     return (
         <form onSubmit={onFormSubmit}>
-            Email: <input value={email} onChange={(e) => setEmail(e.target.value)} /> <br/>
-            Password: <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" /> <br/>
+            <input name="username" placeholder="Email" type="email" onChange={onChangeForm} value={form.username} /> <br/>
+            <input name="password" placeholder="Password" type="password" onChange={onChangeForm} value={form.password} /> <br/>
+            { errorMessage }<br/>
             <input type="submit" value="Connect" />
         </form>
     );

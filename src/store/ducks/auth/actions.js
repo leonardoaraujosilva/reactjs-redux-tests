@@ -1,17 +1,15 @@
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
-export function loginRequest(email, password) {
+export const loginRequest = (token) => {
     return {
         type: LOGIN_REQUEST,
-        email, 
-        password,
-        loggedIn: true
-    };
+        token: token.accessToken
+    }
 }
 
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
-export function logoutRequest() {
+export const logoutRequest = () => {
     return {
         type: LOGOUT_REQUEST,
-        loggedIn: false
+        token: null
     };
 }

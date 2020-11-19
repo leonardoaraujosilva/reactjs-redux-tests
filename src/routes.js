@@ -7,10 +7,10 @@ import Home from './pages/home';
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const { loggedIn } = useSelector((state) => state.auth);
+    const { token } = useSelector((state) => state.auth);
 
     return (
-        <Route {...rest} render={(props) => loggedIn ?
+        <Route {...rest} render={(props) => token ?
             <Component {...props} /> :
             <Redirect push to="/" />} />
     );

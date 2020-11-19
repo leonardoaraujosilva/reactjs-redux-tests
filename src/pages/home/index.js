@@ -10,6 +10,9 @@ const Home = () => {
     const auth = useSelector(state => state.auth);
     
     const logout = () => {
+        console.log(localStorage.getItem('token'));
+        localStorage.removeItem('token');
+        console.log(localStorage.getItem('token'));
         dispatch(logoutRequest());
     };
 
