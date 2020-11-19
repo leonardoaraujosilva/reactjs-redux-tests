@@ -1,7 +1,21 @@
 .login-form {
-    background-color: yellow;
+    filter: drop-shadow(0 0 0.75rem #ddd);
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 3;
 }
 
 .login-text {
-    color: red;
+    color: #222;
+}
+
+table th {
+    border-bottom: 1px solid #000;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+table td{
+    padding-left: 4px;
+    padding-right: 4px;
 }

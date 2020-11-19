@@ -10,8 +10,6 @@ const SignUp = () => {
 
     const onFormSubmit = (e) => {
         e.preventDefault();
-        console.log();
-
         setForm({email: '', password: ''});
     }
 
