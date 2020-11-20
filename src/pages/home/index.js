@@ -60,7 +60,8 @@ const Home = () => {
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th style={{ textAlign: 'left' }}>Client</th>
+                            <th textAlign='left'>Client</th>
+                            <th textAlign='left'>Client</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,7 +69,8 @@ const Home = () => {
                             orderPage.content.length > 0 && orderPage.content.map(each => (
                                 <tr key={each.id}>
                                     <td>{each.id}</td>
-                                    <td style={{ textAlign: 'left' }}>{each.clientName}</td>
+                                    <td textAlign='left'>{each.clientName}</td>
+                                    <td textAlign='left'>{each.clientName}</td>
                                 </tr>
                             ))
                         }
